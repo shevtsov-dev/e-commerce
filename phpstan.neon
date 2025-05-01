@@ -1,0 +1,16 @@
+includes:
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+
+parameters:
+    level: max
+    paths:
+        - app
+        - routes
+        - database
+        - resources
+    excludePaths:
+        - vendor
+        - storage
+        - bootstrap/cache
+    ignoreErrors:
+        - '#Class App\\Models\\.* uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types#'
