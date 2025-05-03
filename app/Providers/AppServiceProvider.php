@@ -108,6 +108,7 @@ class AppServiceProvider extends ServiceProvider
             'products.edit',
             'products.index',
             'products.show',
+            'home.index',
         ], ProductComposer::class);
 
         View::composer([

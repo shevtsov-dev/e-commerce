@@ -1,4 +1,4 @@
-<footer class="text-body-secondary py-5">
+<footer class="text-body-secondary pt-1">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
             <p class="mb-0">

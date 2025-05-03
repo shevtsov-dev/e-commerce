@@ -1,6 +1,5 @@
 <div class="col">
     <div class="card shadow-lg rounded-3">
-        <!-- Добавим изображение продукта -->
         <img src="{{ $product->image_url }}" class="card-img-top rounded-3" alt="{{ $product->name }}">
         <div class="card-body">
             <h5 class="card-title">{{ $product->name }}</h5>

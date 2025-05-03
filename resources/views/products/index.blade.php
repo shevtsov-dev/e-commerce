@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary mt-4 w-100">Apply Filters</button>
+                        <button type="submit" class="btn btn-primary my-4 w-100">Apply Filters</button>
                     </div>
                 </div>
             </form>
@@ -129,8 +129,18 @@
                                     <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                 </form>
                             </td>
-                        @endif
-                    @endauth
+                            @elseif(auth()->user()?->role->name === 'user')
+                                <td>
+                                    <form action="{{ route('cart.add', $product->id) }}" method="POST" class="inline-block flex my-2">
+                                        @csrf
+                                        <button type="submit"
+                                                class="btn btn-primary text-white px-4 py-2 rounded-pill shadow-sm border-0 hover:bg-blue-700 transition duration-300">
+                                            🛒 Add to Cart
+                                        </button>
+                                    </form>
+                                </td>
+                            @endif
+                        @endauth
                 </tr>
             @endforeach
             </tbody>

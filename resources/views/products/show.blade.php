@@ -8,12 +8,12 @@
 
         <div class="mb-4 p-4 border rounded shadow-sm" style="background-color: #f9f9f9;">
             <p class="lead">Category of product:
-                <a href="{{ route('categories.show', $product->category->id) }}" class="btn btn-link text-dark product-link">
+                <a href="#" class="btn btn-link text-dark product-link">
                     {{ $product->category->name }}
                 </a>
             </p>
             <p class="lead">Producer:
-                <a href="{{ route('producers.show', $product->producer->id) }}" class="btn btn-link text-dark product-link">
+                <a href="#" class="btn btn-link text-dark product-link">
                     {{ $product->producer->name }}
                 </a>
             </p>
@@ -32,22 +32,15 @@
             </div>
         </div>
 
-        <h3>Select additional services:</h3>
-        <form id="service-form" class="mb-4">
-            @foreach($services as $service)
-                <div class="form-check">
-                    <input type="checkbox" name="services[]" value="{{ $service->id }}"
-                           data-price="{{ $service->price }}" class="form-check-input" onchange="calculatePrice()">
-                    <label class="form-check-label">{{ $service->name }} (+ {{ number_format($service->price, 2) }} BYN)</label>
-                </div>
-            @endforeach
+        <form id="add-to-cart-form" method="POST" action="{{ route('cart.add', $product) }}">
+            @csrf
+            <input type="hidden" name="currency" id="form-currency" value="BYN">
+            <input type="hidden" name="services" id="form-services">
+
+            <button type="submit" class="btn btn-success btn-lg" id="total-price-btn">
+                Total Price: {{ number_format($product->price, 2) }} BYN
+            </button>
         </form>
-
-        <p>Total Price: <span id="total-price">{{ number_format($product->price, 2) }}</span> BYN</p>
-
-        <button class="btn btn-success btn-lg" id="total-price-btn">
-            Total Price: {{ number_format($product->price, 2) }} BYN
-        </button>
 
         @auth
             @if(auth()->user()?->role->name === 'admin')
@@ -66,20 +59,33 @@
 
     <script>
         function calculatePrice() {
-            let basePrice = parseFloat(document.getElementById('price').innerText.replace(',', ''));
+            const basePrice = parseFloat(document.getElementById('price').innerText.replace(',', ''));
             let totalPrice = basePrice;
+            let selectedServices = [];
+
             document.querySelectorAll('input[name="services[]"]:checked').forEach(checkbox => {
                 totalPrice += parseFloat(checkbox.dataset.price);
+                selectedServices.push(checkbox.value);
             });
 
             document.getElementById('total-price').innerText = totalPrice.toFixed(2);
             document.getElementById('total-price-btn').innerText = "Total Price: " + totalPrice.toFixed(2);
+
+            // Обновляем скрытое поле для формы
+            document.getElementById('form-services').value = selectedServices.join(',');
         }
 
         function changeCurrency(currency, price) {
             document.getElementById('price').innerText = price.toFixed(2);
             document.getElementById('currency').innerText = currency;
+            document.getElementById('form-currency').value = currency;
+            calculatePrice(); // Пересчитать при смене валюты
         }
+
+        // Обновить при загрузке страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            calculatePrice();
+        });
     </script>
 
     <style>

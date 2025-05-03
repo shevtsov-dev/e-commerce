@@ -36,6 +36,8 @@ final class AuthController extends Controller
     public function login(LoginRequest $request): RedirectResponse
     {
         if ($this->userRepository->attemptLogin($request->validated())) {
+            session()->forget('cart');
+
             return redirect(route('home'));
         }
 
@@ -72,6 +74,8 @@ final class AuthController extends Controller
     public function logout(): RedirectResponse
     {
         $this->userRepository->logoutUser();
+
+        session()->forget('cart');
 
         return redirect(route('home'));
     }
