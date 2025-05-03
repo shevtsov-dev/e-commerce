@@ -22,7 +22,7 @@
                     <div class="list-group-item d-flex justify-content-between align-items-center p-4 shadow-sm rounded">
                         <div>
                             <h5 class="mb-2 text-dark">{{ $item['name'] }}</h5>
-                            <p class="text-muted mb-1">Price: ${{ number_format($item['price'], 2) }}</p>
+                            <p class="text-muted mb-1">Price: {{ number_format($item['price'], 2) }} BYN</p>
                             <p class="text-muted">Quantity: {{ $item['quantity'] }}</p>
                         </div>
                         <form action="{{ route('cart.remove', $id) }}" method="POST" class="mb-0">
@@ -34,7 +34,7 @@
 
                 <div class="d-flex justify-content-between align-items-center border-top pt-3 mt-4">
                     <div class="h5 font-weight-bold">Total:</div>
-                    <div class="h4 text-primary">${{ number_format($total, 2) }}</div>
+                    <div class="h4 text-primary">{{ number_format($total, 2) }} BYN</div>
                 </div>
 
                 <div class="d-flex justify-content-between mt-5">

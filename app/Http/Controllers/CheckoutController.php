@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -17,14 +19,37 @@ class CheckoutController extends Controller
 
     public function process(Request $request): RedirectResponse
     {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $email = $request->input('email');
         $cart = session('cart', []);
         $total = collect($cart)->reduce(fn($carry, $item) => $carry + $item['price'] * $item['quantity'], 0);
 
-        // Тут будет логика оплаты, пока просто:
-        // 1. Очистим корзину
+        // 1. Формируем текст заказа
+        $orderText = "🛒 Новый заказ:\n\n";
+        foreach ($cart as $item) {
+            $orderText .= "🔹 {$item['name']} — {$item['quantity']} x {$item['price']} BYN\n";
+        }
+        $orderText .= "\n💰 Итоговая сумма: $total BYN\n";
+        $orderText .= "📧 Email покупателя: $email";
+
+        // 2. Отправляем на email
+        Mail::raw($orderText, function ($message) use ($email) {
+            $message->to($email)
+                ->subject('Ваш заказ принят');
+        });
+
+        $response = Http::post("https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/sendMessage", [
+            'chat_id' => env('TELEGRAM_CHAT_ID'),
+            'text' => $orderText,
+        ]);
+
+        // 4. Очищаем корзину
         session()->forget('cart');
 
-        // 2. Перенаправим на спасибо
-        return redirect()->route('checkout.thankyou')->with('success', 'Payment successful!');
+        // 5. Редирект
+        return redirect()->route('checkout.thankyou')->with('success', 'Спасибо за заказ! Подробности на почте.');
     }
 }

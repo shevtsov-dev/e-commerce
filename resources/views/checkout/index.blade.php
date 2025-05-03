@@ -13,10 +13,13 @@
             </div>
 
             <div class="mb-3">
-                <strong>Total: ${{ number_format($total, 2) }}</strong>
+                <strong>Total: {{ number_format($total, 2) }} BYN</strong>
             </div>
 
-            <button type="submit" class="btn btn-primary">Pay Now</button>
+            <div class="d-flex justify-content-between">
+                <a href="{{ route('cart.index') }}" class="btn btn-secondary">← Back to Cart</a>
+                <button type="submit" class="btn btn-primary">Pay Now</button>
+            </div>
         </form>
     </div>
 @endsection
