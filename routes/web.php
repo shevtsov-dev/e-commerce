@@ -11,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Web\Product\CategoryController;
 use App\Http\Controllers\Web\Product\ProducerController;
 use App\Http\Controllers\Web\Product\ProductController;
@@ -41,6 +42,8 @@ Route::middleware([Authenticate::class])->group(callback: function () {
 
     Route::resource('categories', CategoryController::class);
     Route::resource('producers', ProducerController::class);
+
+    Route::get('/search', [SearchController::class, 'index'])->name('search.index');
 
     Route::middleware([CheckRole::class])->prefix('admin')->name('admin.')->group(function () {
         Route::resource('users', UserController::class);

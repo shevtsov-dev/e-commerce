@@ -27,7 +27,6 @@ class CheckoutController extends Controller
         $cart = session('cart', []);
         $total = collect($cart)->reduce(fn($carry, $item) => $carry + $item['price'] * $item['quantity'], 0);
 
-        // 1. Формируем текст заказа
         $orderText = "🛒 Новый заказ:\n\n";
         foreach ($cart as $item) {
             $orderText .= "🔹 {$item['name']} — {$item['quantity']} x {$item['price']} BYN\n";
@@ -35,7 +34,6 @@ class CheckoutController extends Controller
         $orderText .= "\n💰 Итоговая сумма: $total BYN\n";
         $orderText .= "📧 Email покупателя: $email";
 
-        // 2. Отправляем на email
         Mail::raw($orderText, function ($message) use ($email) {
             $message->to($email)
                 ->subject('Ваш заказ принят');
@@ -46,10 +44,8 @@ class CheckoutController extends Controller
             'text' => $orderText,
         ]);
 
-        // 4. Очищаем корзину
         session()->forget('cart');
 
-        // 5. Редирект
         return redirect()->route('checkout.thankyou')->with('success', 'Спасибо за заказ! Подробности на почте.');
     }
 }

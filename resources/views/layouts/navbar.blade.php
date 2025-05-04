@@ -89,7 +89,13 @@
                 <strong>R. Shautsou E-Commerce Project</strong>
             </a>
             <div class="d-flex">
-                <div class="d-flex">
+                <div class="d-flex" style="gap: 10px">
+                    @auth
+                        <form action="{{ route('search.index') }}" method="GET" class="d-flex">
+                            <input type="text" name="q" class="form-control me-2" placeholder="Search products..." required>
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                        </form>
+                    @endauth
                     @guest
                         <a href="{{ route('auth.login') }}" class="navbar-brand align-items-center">Login</a>
                         <a href="{{ route('auth.registration') }}" class="navbar-brand align-items-center">Registration</a>

@@ -26,7 +26,7 @@ class CheckRole
         $user = Auth::user();
 
         if ($user && $user->role_id !== 1) {
-            return response()->view('errors.403');
+            return response()->view('errors.404');
         }
 
         return $next($request);
