@@ -3,7 +3,7 @@
 @section('title', 'Edit user')
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container mt-5 py-5">
         <h2>Edit user</h2>
         <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
             @csrf

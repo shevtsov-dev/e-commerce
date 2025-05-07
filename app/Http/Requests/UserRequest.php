@@ -28,11 +28,21 @@ class UserRequest extends FormRequest
         $user   = $this->route('user');
         $userId = $user instanceof User ? $user->id : null;
 
+        $isCreating = $this->isMethod('POST');
+
         return [
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email,' . ($userId ?: 'NULL'),
-            'password' => $this->isCreatingRequest() ? 'required|string|min:8' : 'nullable|string|min:8',
-            'role_id'  => 'required|exists:roles,id',
+            'name' => $isCreating ? 'required|string|max:255' : 'nullable|string|max:255',
+
+            // Разрешаем email только при создании
+            'email' => $isCreating
+                ? 'required|email|unique:users,email'
+                : '', // ничего не валидируем
+
+            'password' => $isCreating
+                ? 'required|string|min:8|confirmed'
+                : 'sometimes|nullable|string|min:8|confirmed',
+
+            'role_id' => 'required|exists:roles,id',
         ];
     }
 
@@ -65,6 +75,11 @@ class UserRequest extends FormRequest
             'password.required' => safe_trans('messages.password_required', [
                 'attribute' => safe_trans('field_names.password'),
             ]),
+
+            'password.confirmed' => safe_trans('messages.password_confirmation', [
+                'attribute' => safe_trans('field_names.password'),
+            ]),
+
             'password.min' => safe_trans('messages.password_min', [
                 'attribute' => safe_trans('field_names.password'),
             ]),

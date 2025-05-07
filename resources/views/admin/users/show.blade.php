@@ -3,7 +3,7 @@
 @section('title', $user->name)
 
 @section('content')
-    <section class="mt-7 py-5 container">
+    <section class="mt-5 py-5 container">
         <h1>User: "{{$user->name}}"</h1>
 
         <p>Email: {{$user->email}}</p>

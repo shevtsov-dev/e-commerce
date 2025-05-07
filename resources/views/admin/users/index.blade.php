@@ -3,7 +3,7 @@
 @section('title', 'Users')
 
 @section('content')
-    <section class="mt-7 py-5 text-center container">
+    <section class="mt-5 py-5 text-center container">
         <h1>Users</h1>
         <a href="{{ route('admin.users.create') }}" class="btn btn-primary mb-3">Create new user</a>
 

@@ -3,12 +3,12 @@
 @section('title', 'Users')
 
 @section('content')
-    <section class="mt-7 pt-5 text-center container">
+    <section class="mt-5 pt-5 text-center container">
         <h1>Admin Dashboard</h1>
         <p>Welcome to the admin panel.</p>
     </section>
 
-    <div class="d-flex gap-3" style="align-items: center; justify-content: center">
+    <section class="d-flex gap-3" style="align-items: center; justify-content: center">
         @auth
             @if(auth()->user()?->role->name === 'admin')
                 <a href="{{ route('admin.users.create') }}" class="btn btn-primary">Create new user</a>
@@ -21,7 +21,7 @@
                 </form>
             @endif
         @endauth
-    </div>
+    </section>
 
     <section class="text-center container">
 

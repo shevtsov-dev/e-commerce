@@ -3,7 +3,7 @@
 @section('title', 'Add category')
 
 @section('content')
-    <div class="container mt-5">
+    <section class="container mt-5 py-5">
         <h2>Create new category</h2>
         <form action="{{ route('categories.store') }}" method="POST">
             @csrf
@@ -19,5 +19,5 @@
 
             <button type="submit" class="btn btn-primary">Create category</button>
         </form>
-    </div>
+    </section>
 @endsection

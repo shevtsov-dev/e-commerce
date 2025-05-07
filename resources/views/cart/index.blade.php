@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container py-5">
+    <section class="container py-5">
         <h1 class="text-center text-primary mb-4">🛒 Your Cart</h1>
 
         @if(session('success'))
@@ -50,5 +50,5 @@
                 </div>
             </div>
         @endif
-    </div>
+    </section>
 @endsection

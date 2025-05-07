@@ -3,7 +3,7 @@
 @section('title', 'Login')
 
 @section('content')
-    <div class="container mt-5">
+    <section class="container mt-5 py-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
@@ -34,5 +34,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection

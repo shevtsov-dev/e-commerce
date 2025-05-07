@@ -3,7 +3,7 @@
 @section('title', 'Edit ' . $category->name . ' category')
 
 @section('content')
-    <div class="container mt-5">
+    <section class="container mt-5 py-5">
         <h2>Edit category</h2>
         <form action="{{ route('categories.update', $category->id) }}" method="POST">
             @csrf
@@ -23,5 +23,5 @@
 
             <button type="submit" class="btn btn-primary">Update category</button>
         </form>
-    </div>
+    </section>
 @endsection

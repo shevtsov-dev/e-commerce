@@ -3,7 +3,7 @@
 @section('title', 'Edit ' . $product->name . ' Product')
 
 @section('content')
-    <div class="container my-5 py-3">
+    <section class="container my-5 py-5">
         <h2>Edit Product</h2>
 
         <form action="{{ route('products.update', $product->id) }}" method="POST">
@@ -87,5 +87,5 @@
 
             <button type="submit" class="btn btn-primary">Update Product</button>
         </form>
-    </div>
+    </section>
 @endsection

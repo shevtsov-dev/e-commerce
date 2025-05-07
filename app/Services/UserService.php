@@ -31,7 +31,15 @@ class UserService
     {
         $user = $this->userRepository
             ->findById($userId);
-        $user->update($request->validated());
+
+        $data = $request->validated();
+        unset($data['email']);
+
+        if (empty($data['password'])) {
+            unset($data['password']);
+        }
+
+        $user->update($data);
         $this->logger->info(safe_trans('messages.updated_success'. $user->id));
 
         return $user;

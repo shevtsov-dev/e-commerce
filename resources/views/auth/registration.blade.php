@@ -3,7 +3,7 @@
 @section('title', 'Add user')
 
 @section('content')
-    <div class="container mt-5">
+    <section class="container mt-5 py-5">
         <h2>Create new user</h2>
         <form action="{{ route('auth.registration') }}" method="POST">
             @csrf
@@ -41,5 +41,5 @@
 
             <button type="submit" class="btn btn-primary">Create User</button>
         </form>
-    </div>
+    </section>
 @endsection

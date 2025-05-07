@@ -3,7 +3,7 @@
 @section('title', 'Add producer')
 
 @section('content')
-    <div class="container mt-5">
+    <section class="container mt-5 py-5">
         <h2>Create new producer</h2>
         <form action="{{ route('producers.store') }}" method="POST">
             @csrf
@@ -26,5 +26,5 @@
 
             <button type="submit" class="btn btn-primary">Create producer</button>
         </form>
-    </div>
+    </section>
 @endsection

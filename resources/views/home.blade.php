@@ -3,7 +3,7 @@
 @section('title', 'Market')
 
 @section('content')
-    <section class="mt-5 py-3 text-center container">
+    <section class="mt-5 py-5 text-center container">
         @auth
             <h1>Nice to see you, {{ Auth::user()->name }}!</h1>
         @endauth
@@ -21,14 +21,11 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Popular products</h2>
 
-                <!-- Swiper -->
                 <div class="swiper">
                     <div class="swiper-wrapper">
                         @foreach ($products as $product)
                             <div class="swiper-slide product-card" data-url="{{ route('products.show', $product) }}" style="cursor: pointer;">
                                 <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4">
-                                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}"
-                                         class="w-full h-48 object-cover rounded-md mb-4">
                                     <h3 class="text-xl font-semibold text-gray-800">{{ $product->name }}</h3>
                                     <p class="text-gray-600 mt-2 mb-4">{{ Str::limit($product->description, 80) }}</p>
                                     <div class="flex justify-between items-center">
@@ -39,11 +36,9 @@
                         @endforeach
                     </div>
 
-                    <!-- Навигационные кнопки -->
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                 </div>
-                <!-- Конец Swiper -->
             </div>
         </div>
 
@@ -64,26 +59,25 @@
         </div>
     </section>
 
-    <!-- Инициализация Swiper -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const swiper = new Swiper('.swiper', {
-                slidesPerView: 3,       // Количество слайдов, которые показываются одновременно
-                spaceBetween: 20,       // Расстояние между слайдами
-                loop: true,             // Бесконечный цикл
+                slidesPerView: 3,
+                spaceBetween: 20,
+                loop: true,
                 navigation: {
-                    nextEl: '.swiper-button-next',   // Кнопка "следующий"
-                    prevEl: '.swiper-button-prev',   // Кнопка "предыдущий"
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
                 },
                 breakpoints: {
                     640: {
-                        slidesPerView: 1,  // На маленьких экранах показывать 1 слайд
+                        slidesPerView: 1,
                     },
                     768: {
-                        slidesPerView: 2,  // На экранах средних размеров показывать 2 слайда
+                        slidesPerView: 2,
                     },
                     1024: {
-                        slidesPerView: 3,  // На больших экранах показывать 3 слайда
+                        slidesPerView: 3,
                     },
                 },
             });
@@ -97,17 +91,16 @@
             productCards.forEach(function (card) {
                 card.addEventListener('click', function () {
                     const url = card.getAttribute('data-url');
-                    window.location.href = url; // Переход на ссылку товара
+                    window.location.href = url;
                 });
             });
         });
     </script>
 
-    <!-- Стили для слайдера -->
     <style>
         .swiper-slide {
-            width: 300px;  /* фиксированная ширина */
-            height: 400px; /* фиксированная высота */
+            width: 300px;
+            height: 400px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -117,17 +110,17 @@
 
         .swiper-slide img {
             width: 100%;
-            height: 200px; /* фиксированная высота для изображений */
-            object-fit: cover; /* сохраняет пропорции изображения */
+            height: 200px;
+            object-fit: cover;
         }
 
         .button {
             display: inline-block;
-            background-color: #2563eb; /* Синий цвет */
+            background-color: #2563eb;
             color: white;
-            padding: 0.75rem 2rem; /* Паддинги для кнопки */
-            border-radius: 9999px; /* Закругленные углы */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень */
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
             font-size: 1rem;
             font-weight: 600;
@@ -136,14 +129,14 @@
         }
 
         .button:hover {
-            background-color: #1d4ed8; /* Темнее синий при наведении */
-            transform: scale(1.05); /* Увеличение при наведении */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Увеличение тени при наведении */
+            background-color: #1d4ed8;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .button:focus {
-            outline: none; /* Убираем обводку */
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5); /* Фокусное кольцо */
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5);
         }
     </style>
 @endsection

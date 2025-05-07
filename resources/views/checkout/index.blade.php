@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container py-5">
+    <section class="container py-5">
         <h1 class="mb-4">Checkout</h1>
 
         <form action="{{ route('checkout.process') }}" method="POST">
@@ -21,5 +21,5 @@
                 <button type="submit" class="btn btn-primary">Pay Now</button>
             </div>
         </form>
-    </div>
+    </section>
 @endsection

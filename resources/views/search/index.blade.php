@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container py-5">
+    <section class="container py-5">
         <h2>Search results for: "{{ $query }}"</h2>
 
         @if($products->isEmpty())
@@ -33,5 +33,5 @@
         <div class="d-flex justify-content-center mt-4">
             {{ $products->appends(request()->except('page'))->links('pagination::bootstrap-5') }}
         </div>
-    </div>
+    </section>
 @endsection

@@ -3,7 +3,7 @@
 @section('title', 'Edit ' . $producer->name . ' producer')
 
 @section('content')
-    <div class="container mt-5">
+    <section class="container mt-5 py-5">
         <h2>Edit producer</h2>
         <form action="{{ route('producers.update', $producer->id) }}" method="POST">
             @csrf
@@ -29,5 +29,5 @@
 
             <button type="submit" class="btn btn-primary">Update producer</button>
         </form>
-    </div>
+    </section>
 @endsection

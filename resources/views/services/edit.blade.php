@@ -3,7 +3,7 @@
 @section('title', 'Edit ' . $service->name . ' service')
 
 @section('content')
-    <div class="container my-5 py-3">
+    <section class="container my-5 py-5">
         <h2>Edit service</h2>
         <form action="{{ route('services.update', $service->id) }}" method="POST">
             @csrf
@@ -47,5 +47,5 @@
 
             <button type="submit" class="btn btn-primary w-100">Update service</button>
         </form>
-    </div>
+    </section>
 @endsection

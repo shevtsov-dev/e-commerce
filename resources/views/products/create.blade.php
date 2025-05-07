@@ -3,7 +3,7 @@
 @section('title', 'Add Product')
 
 @section('content')
-    <div class="container mt-5 py-3">
+    <section class="container mt-5 py-5">
         <h2>Create New Product</h2>
 
         <form action="{{ route('products.store') }}" method="POST">
@@ -75,5 +75,5 @@
 
             <button type="submit" class="btn btn-primary">Create Product</button>
         </form>
-    </div>
+    </section>
 @endsection

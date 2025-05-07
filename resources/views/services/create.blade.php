@@ -3,7 +3,7 @@
 @section('title', 'Add service')
 
 @section('content')
-    <div class="container mt-5 py-3">
+    <section class="container mt-5 py-5">
         <h2>Create new service</h2>
         <form action="{{ route('services.store') }}" method="POST">
             @csrf
@@ -41,5 +41,5 @@
 
             <button type="submit" class="btn btn-primary w-100">Create service</button>
         </form>
-    </div>
+    </section>
 @endsection
